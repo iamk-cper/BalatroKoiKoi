@@ -1,0 +1,11 @@
+res://scenes/CardSlot.tscn
+res://scenes/Card.tscn
+res://scenes/CardSlotsHand.tscn
+res://scenes/CardSlotsDeck.tscn
+res://scenes/CardSlotsTable.tscn
+res://scenes/Game.tscn
+res://scenes/CardManager.tscn
+res://scripts/Card.gd
+res://scripts/CardManager.gd
+res://scripts/CardSlotsHand.gd
+res://scripts/CardSlotsTable.gd

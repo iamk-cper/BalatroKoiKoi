@@ -1,0 +1,57 @@
+[gd_scene load_steps=5 format=3 uid="uid://bnamcqs2twi8p"]
+
+[ext_resource type="Script" uid="uid://dytrrh1jfyop7" path="res://scripts/CardSlotsDeck.gd" id="1_cpr0p"]
+[ext_resource type="Texture2D" uid="uid://b24kcfnurcu0e" path="res://assets/54ff1f32-712d-4a4f-a5c2-d052ece7437d.jpg" id="1_ibkli"]
+[ext_resource type="Texture2D" uid="uid://b55n86tu7rk0q" path="res://assets/cards/Hanafuda April 1.svg" id="1_qbsmt"]
+[ext_resource type="Script" uid="uid://bo6ay8866ef66" path="res://scripts/CardSlotsHand.gd" id="2_78awf"]
+
+[node name="Game" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="TextureRect" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.192157)
+position = Vector2(641, 359.5)
+scale = Vector2(0.665974, 0.665741)
+texture = ExtResource("1_ibkli")
+
+[node name="CardManager" type="Node2D" parent="."]
+
+[node name="CardSlotsJokers" type="Control" parent="CardManager"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CardSlotsHand" type="Control" parent="CardManager"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_78awf")
+
+[node name="CardSlotsDeck" type="Control" parent="CardManager"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_cpr0p")
+
+[node name="TextureRect" type="TextureRect" parent="CardManager/CardSlotsDeck"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 355.0
+offset_top = 273.0
+offset_right = 1331.0
+offset_bottom = 1873.0
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("1_qbsmt")
+
+[node name="Button" type="Button" parent="CardManager/CardSlotsDeck"]
+layout_mode = 0
+offset_left = 355.0
+offset_top = 273.0
+offset_right = 433.0
+offset_bottom = 401.0

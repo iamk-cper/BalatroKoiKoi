@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://7pxvanfjo3ci"]
+
+[ext_resource type="Script" uid="uid://b2wksf1taux2c" path="res://scripts/CardSlot.gd" id="1_or4gj"]
+
+[node name="CardSlot" type="Control"]
+layout_mode = 3
+anchor_right = 0.068
+anchor_bottom = 0.198
+offset_right = -78.336
+offset_bottom = -128.304
+script = ExtResource("1_or4gj")

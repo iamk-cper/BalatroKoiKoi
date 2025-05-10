@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://bw5i0jbg0ln80"]
+
+[ext_resource type="Script" uid="uid://ckt78lgkyqpjt" path="res://scripts/CardManager.gd" id="1_6e8gc"]
+[ext_resource type="PackedScene" uid="uid://bccmvl6xdtlji" path="res://scenes/CardSlotsDeck.tscn" id="2_hyv48"]
+[ext_resource type="PackedScene" uid="uid://dj1gva5li68wr" path="res://scenes/CardSlotsHand.tscn" id="3_noh0b"]
+[ext_resource type="PackedScene" uid="uid://cy78vqn7x3tgt" path="res://scenes/CardSlotsTable.tscn" id="4_6dqtc"]
+
+[node name="CardManager" type="Node2D"]
+script = ExtResource("1_6e8gc")
+
+[node name="CardSlotsDeck" parent="." instance=ExtResource("2_hyv48")]
+
+[node name="CardSlotsHand" parent="." instance=ExtResource("3_noh0b")]
+
+[node name="CardSlotsTable" parent="." instance=ExtResource("4_6dqtc")]
+
+[node name="Card" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0

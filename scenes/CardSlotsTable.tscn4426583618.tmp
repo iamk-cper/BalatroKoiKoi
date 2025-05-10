@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cy78vqn7x3tgt"]
+
+[ext_resource type="Script" uid="uid://clxep2ng5skvy" path="res://scripts/CardSlotsTable.gd" id="1_g64mh"]
+
+[node name="CardSlotsTable" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_g64mh")

@@ -1,0 +1,32 @@
+# Systemowe pliki i katalogi
+.DS_Store
+Thumbs.db
+
+# Pliki i katalogi Godot
+.import/             # Pliki importu zasobów
+export/              # Folder eksportu
+.idea/               # Pliki projektu IDE (np. IntelliJ)
+.vscode/             # Pliki ustawień VSCode
+
+# Pliki generowane automatycznie
+*.import             # Pliki importu zasobów (każdy format)
+*.tmp                # Pliki tymczasowe
+*.log                # Pliki dziennika
+
+# Pliki specyficzne dla systemu operacyjnego
+*.exe                # Windows
+*.dll                # Windows biblioteki
+*.pdb                # Windows pliki debugowania
+*.app                # MacOS
+*.dylib              # MacOS biblioteki
+*.so                 # Linux biblioteki
+
+# Pliki Godot, które można pominąć
+export_presets.cfg   # Pliki presetów eksportu (jeśli są specyficzne dla użytkownika)
+
+# Pliki tymczasowe scen i skryptów
+*.tmp                # Pliki tymczasowe
+*.log                # Logi uruchomienia
+
+# Pliki konfiguracyjne specyficzne dla użytkownika
+.project_metadata/   # Dane edytora specyficzne dla użytkownika
