@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqqrsv5wc3a3p"]
+
+[ext_resource type="PackedScene" uid="uid://culvrb7cx8gms" path="res://scenes/DataButton.tscn" id="1_dbhxa"]
+
+[node name="AllCardsButton" instance=ExtResource("1_dbhxa")]
+
+[node name="CardNumber" parent="." index="0"]
+offset_left = 35.0
+offset_top = 33.0
+offset_right = 217.0
+offset_bottom = 62.0
+
+[node name="CardNumberBackground" parent="." index="1"]
+offset_top = 0.0
+offset_right = 251.0
+offset_bottom = 95.0

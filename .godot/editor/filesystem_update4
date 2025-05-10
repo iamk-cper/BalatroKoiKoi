@@ -9,3 +9,9 @@ res://scripts/Card.gd
 res://scripts/CardManager.gd
 res://scripts/CardSlotsHand.gd
 res://scripts/CardSlotsTable.gd
+res://scripts/CardSlotsTaken.gd
+res://scenes/DataButton.tscn
+res://scenes/AllCardsButton.tscn
+res://scripts/ModeButton.gd
+res://scripts/CardImage.gd
+res://scripts/CardSelection.gdshader

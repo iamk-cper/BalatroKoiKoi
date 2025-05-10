@@ -1,6 +1,14 @@
 Control
+PanelContainer
+Panel
+ColorRect
 Button
-TextureRect
 Node2D
+MarginContainer
+VBoxContainer
+CenterContainer
+HBoxContainer
+GridContainer
+TextureRect
 Label
 Sprite2D

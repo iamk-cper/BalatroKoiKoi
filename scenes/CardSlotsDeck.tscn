@@ -1,19 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://bccmvl6xdtlji"]
+[gd_scene load_steps=3 format=3 uid="uid://bccmvl6xdtlji"]
 
+[ext_resource type="PackedScene" uid="uid://culvrb7cx8gms" path="res://scenes/DataButton.tscn" id="1_2y7fe"]
 [ext_resource type="Texture2D" uid="uid://b1trxr0my4lrk" path="res://assets/cards/Hanafuda blank card Alt.svg" id="1_gkq5p"]
 
 [node name="CardSlotsDeck" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 114.0
+offset_bottom = 185.0
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = -1
-offset_left = 359.0
-offset_top = 274.0
-offset_right = 1335.0
-offset_bottom = 1874.0
+offset_left = 18.0
+offset_right = 994.0
+offset_bottom = 1600.0
 scale = Vector2(0.08, 0.08)
 texture = ExtResource("1_gkq5p")
+
+[node name="DataButton" parent="." instance=ExtResource("1_2y7fe")]
