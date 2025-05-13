@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://b8t8233xnte3y"]
+
+[ext_resource type="Texture2D" uid="uid://bub6iltsrylpq" path="res://assets/others/blank.png" id="1_at6pf"]
+[ext_resource type="Script" uid="uid://oouo23p51apx" path="res://scripts/DeckCounterLabel.gd" id="2_suq5b"]
+[ext_resource type="Script" uid="uid://b5fuscx0qh4xx" path="res://scripts/table_pair.gd" id="3_kllgr"]
+
+[node name="TablePair" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CardNumberBackground" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 438.0
+offset_right = 188.0
+offset_bottom = 577.0
+texture = ExtResource("1_at6pf")
+expand_mode = 1
+
+[node name="CardNumber" type="Label" parent="."]
+layout_mode = 0
+offset_left = 62.0
+offset_top = 481.0
+offset_right = 140.0
+offset_bottom = 510.0
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+script = ExtResource("2_suq5b")
+
+[node name="Description" type="Label" parent="."]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 505.0
+offset_right = 151.0
+offset_bottom = 528.0
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+script = ExtResource("3_kllgr")

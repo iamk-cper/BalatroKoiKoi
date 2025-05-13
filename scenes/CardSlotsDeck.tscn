@@ -19,3 +19,4 @@ scale = Vector2(0.08, 0.08)
 texture = ExtResource("1_gkq5p")
 
 [node name="DataButton" parent="." instance=ExtResource("1_2y7fe")]
+position = Vector2(0, 110)

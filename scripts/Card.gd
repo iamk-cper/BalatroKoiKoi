@@ -65,6 +65,6 @@ func _gui_input(event: InputEvent) -> void:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			var parent = get_parent().get_parent()
 			print("[DEBUG] Kliknięto kartę: " + card_id + " Parent name: " + parent.name)
-			if parent and parent.name == "CardSlotsHand":
+			if parent and (parent.name == "CardSlotsHand" || parent.name == "CardSlotsTable"):
 				print("Kliknięto kartę: ", card_id)
 				parent.toggle_card_selection(self)

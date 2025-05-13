@@ -3,6 +3,10 @@ extends Control
 @export var card_slot_scene: PackedScene = preload("res://scenes/CardSlot.tscn")
 @export var card_scene:     PackedScene = preload("res://scenes/Card.tscn")
 
+var selected_cards: Array = []
+var selected_number: int = 0
+var selection_limit: int = 1
+
 const SLOT_SPACING: int = 120          # odstęp między slotami (w pikselach)
 const DISPLAY_SCALE: float = 0.08      # współczynnik skalowania
 var ROW_Y = 0
@@ -17,6 +21,38 @@ func _ready() -> void:
 
 	generate_card_slots()
 	call_deferred("_populate_empty_slots")  # uzupełniamy, gdy talia będzie gotowa
+
+func toggle_card_selection(card: Node) -> void:
+	if card in selected_cards:
+		selected_number -= 1
+		selected_cards.erase(card)
+		card.deselect() # Funkcja odznaczenia w skrypcie Card
+		print("[DEBUG] Karta odznaczona w CardSlotsHand: ", card.card_id)
+	elif selected_number < selection_limit:
+		selected_number += 1
+		selected_cards.append(card)
+		card.select() # Funkcja zaznaczenia w skrypcie Card
+		print("[DEBUG] Karta zaznaczona w CardSlotsHand: ", card.card_id)
+	
+	print("[DEBUG] Aktualna liczba zaznaczonych kart: ", selected_cards.size())
+	print("[DEBUG] Lista zaznaczonych kart: ", get_selected_cards_ids())
+	
+func get_selected_cards_ids() -> Array:
+	var ids = []
+	for card in selected_cards:
+		ids.append(card.card_id)
+	return ids
+	
+		# Wyczyszczenie wszystkich zaznaczeń
+func clear_selection() -> void:
+	for card in selected_cards:
+		card.deselect()
+	selected_number = 0
+	selected_cards.clear()
+
+# Pobranie wszystkich zaznaczonych kart
+func get_selected_cards() -> Array:
+	return selected_cards
 
 func generate_card_slots() -> void:
 	

@@ -1,0 +1,51 @@
+[gd_scene load_steps=4 format=3 uid="uid://bi52yj1uvka4"]
+
+[ext_resource type="Texture2D" uid="uid://bub6iltsrylpq" path="res://assets/others/blank.png" id="1_kmcut"]
+[ext_resource type="Script" uid="uid://oouo23p51apx" path="res://scripts/DeckCounterLabel.gd" id="2_cvfse"]
+
+[sub_resource type="GDScript" id="GDScript_7xwbi"]
+script/source = "extends Label
+##
+##  Wyświetla liczbę kart pozostałych w talii.
+##
+
+func _ready() -> void:
+	text = \"Table swap\"
+"
+
+[node name="TableDraw" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CardNumberBackground" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 438.0
+offset_right = 188.0
+offset_bottom = 577.0
+texture = ExtResource("1_kmcut")
+expand_mode = 1
+
+[node name="CardNumber" type="Label" parent="."]
+layout_mode = 0
+offset_left = 62.0
+offset_top = 481.0
+offset_right = 140.0
+offset_bottom = 510.0
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+script = ExtResource("2_cvfse")
+
+[node name="Description" type="Label" parent="."]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 505.0
+offset_right = 151.0
+offset_bottom = 528.0
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+script = SubResource("GDScript_7xwbi")

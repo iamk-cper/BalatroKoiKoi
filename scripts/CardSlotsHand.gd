@@ -10,6 +10,8 @@ var selected_cards: Array = []
 const SLOT_SPACING: int = 120          # odstęp między slotami (w pikselach)
 const DISPLAY_SCALE: float = 0.08      # współczynnik skalowania
 const ROW_Y: int = 515                 # pozycja w pionie
+var selection_limit: int = 1
+var selected_number: int = 0
 
 @onready var _card_manager: CardManager = (
 	get_tree().get_first_node_in_group("card_manager") as CardManager
@@ -18,10 +20,12 @@ const ROW_Y: int = 515                 # pozycja w pionie
 # Funkcja do zaznaczania karty
 func toggle_card_selection(card: Node) -> void:
 	if card in selected_cards:
+		selected_number -= 1
 		selected_cards.erase(card)
 		card.deselect() # Funkcja odznaczenia w skrypcie Card
 		print("[DEBUG] Karta odznaczona w CardSlotsHand: ", card.card_id)
-	else:
+	elif selected_number < selection_limit:
+		selected_number += 1
 		selected_cards.append(card)
 		card.select() # Funkcja zaznaczenia w skrypcie Card
 		print("[DEBUG] Karta zaznaczona w CardSlotsHand: ", card.card_id)
@@ -39,6 +43,7 @@ func get_selected_cards_ids() -> Array:
 func clear_selection() -> void:
 	for card in selected_cards:
 		card.deselect()
+	selected_number = 0
 	selected_cards.clear()
 
 # Pobranie wszystkich zaznaczonych kart
