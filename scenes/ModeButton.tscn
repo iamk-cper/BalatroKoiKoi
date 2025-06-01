@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://ccror1u7utb8d"]
+
+[ext_resource type="Script" uid="uid://diw6hx4c87xh6" path="res://scripts/ModeButton.gd" id="1_w0lv7"]
+[ext_resource type="Texture2D" uid="uid://c5klnjvri4fxx" path="res://assets/others/swap.png" id="2_s2014"]
+[ext_resource type="Texture2D" uid="uid://bbbt8ba28ng8s" path="res://assets/others/pair.png" id="3_n13aq"]
+
+[node name="ModeButton" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_w0lv7")
+
+[node name="SwapButton" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 467.0
+offset_top = 630.0
+offset_right = 697.0
+offset_bottom = 739.0
+texture = ExtResource("2_s2014")
+expand_mode = 1
+
+[node name="PairButton" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 467.0
+offset_top = 630.0
+offset_right = 697.0
+offset_bottom = 739.0
+texture = ExtResource("3_n13aq")
+expand_mode = 1
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 484.0
+offset_top = 658.0
+offset_right = 682.0
+offset_bottom = 711.0

@@ -1,9 +1,11 @@
 extends Control
 class_name CardSlotsHand
 
-@export var card_count: int = 8
 @export var card_slot_scene: PackedScene = preload("res://scenes/CardSlot.tscn")
 @export var card_scene: PackedScene     = preload("res://scenes/Card.tscn")
+@export var populated_counter: int = 0
+@export var slot_limit: int = 10
+@export var populated_limit: int = 10
 
 var selected_cards: Array = []
 
@@ -53,10 +55,10 @@ func get_selected_cards() -> Array:
 func _ready() -> void:
 	# Zapewnij, że ten Control ma rozmiar i jest widoczny
 	visible = true
-	generate_card_slots(card_count)
-	call_deferred("_populate_empty_slots")
+	generate_card_slots()
+	call_deferred("_populate_empty_slots", 9)
 
-func generate_card_slots(count: int) -> void:
+func generate_card_slots() -> void:
 	for child in get_children():
 		child.queue_free()
 
@@ -64,11 +66,10 @@ func generate_card_slots(count: int) -> void:
 		push_error("CARD_SLOT_SCENE == null – nie załadowano sceny CardSlot.tscn")
 		return
 
-	count = clamp(count, 0, 8)
 	var start_x: float = 370
 	var spacing_scaled: float = SLOT_SPACING * DISPLAY_SCALE
 
-	for i in range(count):
+	for i in slot_limit:
 		var slot: Control = card_slot_scene.instantiate() as Control
 		add_child(slot)
 		var base_w: float = (slot as CardSlot).card_base_size.x
@@ -82,12 +83,17 @@ func generate_card_slots(count: int) -> void:
 		#print("  TextureRect scaled size: ", scaled_size)
 		#print("  Slot size: ", slot.size)
 		
-func _populate_empty_slots() -> void:
+func _populate_empty_slots(number_to_populate: int) -> void:
+	
 	if _card_manager == null:
 		push_error("CardSlotsHand: CardManager NOT found")
 		return
 
 	for slot in get_children():
+		if populated_counter == populated_limit || number_to_populate == 0:
+			return
+		
+			
 		# pomijamy sloty, które już mają kartę
 		if slot.find_child("Card", true, false) != null:
 			continue
@@ -96,9 +102,11 @@ func _populate_empty_slots() -> void:
 		#print(card.print_card_info())
 		if card == null:
 			push_warning("CardSlotsHand: Deck empty – no card drawn")
-			continue
+			return;
 
 		slot.add_child(card)
 		card.set_image_path()
+		populated_counter += 1
+		number_to_populate -= 1
 
 		print("[DEBUG] Added card '%s' to slot '%s'" % [card.card_info(), slot.name])

@@ -2,6 +2,9 @@ extends Control
 
 @export var card_slot_scene: PackedScene = preload("res://scenes/CardSlot.tscn")
 @export var card_scene:     PackedScene = preload("res://scenes/Card.tscn")
+@export var populated_counter: int = 0
+@export var slot_limit: int = 10
+@export var populated_limit: int = 10
 
 var selected_cards: Array = []
 var selected_number: int = 0
@@ -20,7 +23,7 @@ func _ready() -> void:
 	visible = true
 
 	generate_card_slots()
-	call_deferred("_populate_empty_slots")  # uzupełniamy, gdy talia będzie gotowa
+	call_deferred("_populate_empty_slots", 9)  # uzupełniamy, gdy talia będzie gotowa
 
 func toggle_card_selection(card: Node) -> void:
 	if card in selected_cards:
@@ -66,7 +69,7 @@ func generate_card_slots() -> void:
 	var start_x: float = 490
 	var spacing_scaled: float = SLOT_SPACING * DISPLAY_SCALE
 
-	for i in range(10):
+	for i in slot_limit:
 		
 		var slot: Control = card_slot_scene.instantiate() as Control
 		add_child(slot)
@@ -93,12 +96,15 @@ func generate_card_slots() -> void:
 		#print("  TextureRect scaled size: ", scaled_size)
 		#print("  Slot size: ", slot.size)
 
-func _populate_empty_slots() -> void:
+func _populate_empty_slots(number_to_populate: int) -> void:
 	if _card_manager == null:
 		push_error("CardSlotsHand: CardManager NOT found")
 		return
 
 	for slot in get_children():
+		if populated_counter == populated_limit || number_to_populate == 0:
+			return
+			
 		# pomijamy sloty, które już mają kartę
 		if slot.find_child("Card", true, false) != null:
 			continue
@@ -111,5 +117,8 @@ func _populate_empty_slots() -> void:
 
 		slot.add_child(card)
 		card.set_image_path()
+		
+		populated_counter += 1
+		number_to_populate -= 1
 
 		print("[DEBUG] Added card '%s' to slot '%s'" % [card.card_info(), slot.name])
