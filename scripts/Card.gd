@@ -6,6 +6,7 @@ var image_path: String = ""
 var card_id: String = ""
 var card_month: String = ""
 var card_type: String = ""
+var possible_selection: bool = true
 var is_selected: bool = false
 
 @onready var _tex_rect: TextureRect = $"CardImage"
@@ -51,6 +52,14 @@ func select() -> void:
 	else:
 		print("problem z shaderem")
 	print("Karta zaznaczona: ", card_id, " (", card_month, " - ", card_type, ")")
+	
+func swap_selection() -> void:
+	if _material:
+		_material.set("shader_parameter/border_color", Color(1.0, 1.0, 0.0, 1.0))  # Żółty
+	else:
+		print("problem z shaderem")
+	print("Karta możliwa do swapa: ", card_id, " (", card_month, " - ", card_type, ")")
+
 
 func deselect() -> void:
 	is_selected = false

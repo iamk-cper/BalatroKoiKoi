@@ -3,9 +3,10 @@ class_name CardManager
 
 @export var card_scene:     PackedScene = preload("res://scenes/Card.tscn")
 
+@onready var card_slots_hand: Node = get_tree().get_root().get_node("Game/CardManager/CardSlotsHand")
+@onready var card_slots_table: Node = get_tree().get_root().get_node("Game/CardManager/CardSlotsTable")
+
 signal deck_changed(remaining: int)
-
-
 
 ## Karty jeszcze w talii
 var deck: Array[Card] = []
@@ -21,6 +22,21 @@ const MONTHS: PackedStringArray = [
 const TYPES: PackedStringArray = [
 	"Hikari", "Kasu", "Tanzaku", "Tane"
 ]
+
+func swap_possibilities(card: Card) -> void:
+	for slot in card_slots_table.get_children():
+		var possible_card = slot.get_node_or_null("Card")
+		if possible_card == null:
+			continue
+		if possible_card.card_month == card.card_month:
+			possible_card.swap_selection()
+
+func swap_possibilities_clear() -> void:
+	for slot in card_slots_table.get_children():
+		var possible_card = slot.get_node_or_null("Card")
+		if possible_card == null:
+			continue
+		possible_card.deselect()
 
 func _enter_tree() -> void:
 	add_to_group("card_manager")
