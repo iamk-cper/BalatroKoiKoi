@@ -6,6 +6,11 @@ extends Control
 @onready var texture1 = $SwapButton
 @onready var texture2 = $PairButton
 @onready var switch_button = $Button
+@onready var card_slots_table: Node = get_tree().get_root().get_node("Game/CardManager/CardSlotsTable")
+@onready var card_slots_hand: Node = get_tree().get_root().get_node("Game/CardManager/CardSlotsHand")
+@onready var _card_manager: CardManager = (
+	get_tree().get_first_node_in_group("card_manager") as CardManager
+)
 
 # Aktualny stan widoczności
 var is_texture1_visible: bool = false
@@ -20,15 +25,19 @@ func _ready():
 
 # Funkcja zmiany widoczności
 func _on_button_pressed():
-	# Przełączenie stanu widoczności
-	is_texture1_visible = !is_texture1_visible
-	pair_state = !pair_state
 	_update_visibility()
+	if pair_state == true:
+		card_slots_table.clear_selection()
+	elif card_slots_hand.selected_cards.size() == 1:
+		_card_manager.swap_possibilities(card_slots_hand.selected_cards[0])
+		print("[DEBUG] Number of cards selected: %s" % card_slots_hand.selected_cards.size())
+	else:
+		print("[DEBUG] Number of cards selected: %s" % card_slots_hand.selected_cards.size())
+	pair_state = !pair_state
 
 # Aktualizacja widoczności obu TextureRect
 func _update_visibility():
-	var card_slots_hand = get_tree().get_root().get_node("Game/CardManager/CardSlotsHand")
-	var card_slots_table = get_tree().get_root().get_node("Game/CardManager/CardSlotsTable")
+	is_texture1_visible = !is_texture1_visible
 	if is_texture1_visible:
 		texture1.visible = false
 		texture1.modulate.a = 0.0  # 100% widoczność

@@ -19,15 +19,16 @@ var selected_number: int = 0
 	get_tree().get_first_node_in_group("card_manager") as CardManager
 )
 @onready var mode_button: Node = get_tree().get_root().get_node("Game/GUI/ModeButton")
+@onready var card_slots_table: Node = get_tree().get_root().get_node("Game/CardManager/CardSlotsTable")
 
 # Funkcja do zaznaczania karty
 func toggle_card_selection(card: Node) -> void:
 	if card in selected_cards:
 		selected_number -= 1
 		selected_cards.erase(card)
-		card.deselect() # Funkcja odznaczenia w skrypcie Card
+		card.deselect()
 		if mode_button.pair_state == true:
-			_card_manager.swap_possibilities_clear()
+			card_slots_table.clear_selection()
 		print("[DEBUG] Karta odznaczona w CardSlotsHand: ", card.card_id)
 	elif selected_number < selection_limit:
 		selected_number += 1
@@ -115,3 +116,11 @@ func _populate_empty_slots(number_to_populate: int) -> void:
 		number_to_populate -= 1
 
 		print("[DEBUG] Added card '%s' to slot '%s'" % [card.card_info(), slot.name])
+
+func get_cards() -> Array:
+	var cards: Array = []
+	for slot in get_children():
+		for child in slot.get_children():
+			if child is Card:
+				cards.append(child)
+	return cards

@@ -54,6 +54,7 @@ func select() -> void:
 	print("Karta zaznaczona: ", card_id, " (", card_month, " - ", card_type, ")")
 	
 func swap_selection() -> void:
+	is_selected = false
 	if _material:
 		_material.set("shader_parameter/border_color", Color(1.0, 1.0, 0.0, 1.0))  # Żółty
 	else:

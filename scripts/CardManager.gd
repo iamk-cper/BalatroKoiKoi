@@ -34,9 +34,11 @@ func swap_possibilities(card: Card) -> void:
 func swap_possibilities_clear() -> void:
 	for slot in card_slots_table.get_children():
 		var possible_card = slot.get_node_or_null("Card")
-		if possible_card == null:
-			continue
-		possible_card.deselect()
+		print("[DEBUG] swap_possibilities_clear() possible_card value: %s", possible_card)
+		if possible_card != null:
+			possible_card.deselect()
+			#if possible_card in card_slots_table.selected_cards:
+				#card_slots_table.selected_cards.erase(possible_card)
 
 func _enter_tree() -> void:
 	add_to_group("card_manager")
@@ -51,16 +53,12 @@ func _enter_tree() -> void:
 
 func draw_card() -> Card:
 	if deck.is_empty():
-		if discarded.is_empty():
-			return null  # talia definitywnie pusta
-		deck = discarded.duplicate()
-		discarded.clear()
-		_shuffle_deck()
-
-	var card: Card = deck.pop_back()   #  <-- jawny typ String
-	discarded.append(card)
-	emit_signal("deck_changed", deck.size())
-	return card
+		return null
+	else:
+		var card: Card = deck.pop_back()   #  <-- jawny typ String
+		discarded.append(card)
+		emit_signal("deck_changed", deck.size())
+		return card
 
 func reset_deck() -> void:
 	_build_deck()
