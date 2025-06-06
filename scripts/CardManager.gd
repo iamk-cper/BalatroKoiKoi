@@ -51,6 +51,13 @@ func _enter_tree() -> void:
 # API
 # -------------------------------------------------------------------
 
+func get_top_card() -> Card:
+	if deck.is_empty():
+		return null
+	else:
+		var card: Card = deck.back()
+		return card
+
 func draw_card() -> Card:
 	if deck.is_empty():
 		return null

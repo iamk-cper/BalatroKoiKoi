@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://bw5i0jbg0ln80"]
+[gd_scene load_steps=9 format=3 uid="uid://bw5i0jbg0ln80"]
 
 [ext_resource type="Script" uid="uid://ckt78lgkyqpjt" path="res://scripts/CardManager.gd" id="1_6e8gc"]
 [ext_resource type="PackedScene" uid="uid://bccmvl6xdtlji" path="res://scenes/CardSlotsDeck.tscn" id="2_hyv48"]
 [ext_resource type="Texture2D" uid="uid://b24kcfnurcu0e" path="res://assets/54ff1f32-712d-4a4f-a5c2-d052ece7437d.jpg" id="2_noh0b"]
 [ext_resource type="PackedScene" uid="uid://dj1gva5li68wr" path="res://scenes/CardSlotsHand.tscn" id="3_noh0b"]
 [ext_resource type="PackedScene" uid="uid://cy78vqn7x3tgt" path="res://scenes/CardSlotsTable.tscn" id="4_6dqtc"]
+[ext_resource type="Script" uid="uid://dytrrh1jfyop7" path="res://scripts/CardSlotsDeck.gd" id="4_fkf2s"]
+[ext_resource type="Script" uid="uid://lifw483ep31s" path="res://scripts/CardSlotsTaken.gd" id="6_6dqtc"]
 [ext_resource type="Texture2D" uid="uid://bub6iltsrylpq" path="res://assets/others/blank.png" id="7_fkf2s"]
 
 [node name="CardManager" type="Node2D"]
@@ -22,6 +24,7 @@ offset_left = 353.0
 offset_top = 262.0
 offset_right = 467.0
 offset_bottom = 447.0
+script = ExtResource("4_fkf2s")
 
 [node name="CardSlotsHand" parent="." instance=ExtResource("3_noh0b")]
 
@@ -32,6 +35,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("6_6dqtc")
 
 [node name="Hikari" parent="CardSlotsTaken" instance=ExtResource("2_hyv48")]
 offset_left = 1154.0

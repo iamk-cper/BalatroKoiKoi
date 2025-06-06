@@ -4,6 +4,11 @@ extends Control
 @onready var mode_button: Node = get_tree().get_root().get_node("Game/GUI/ModeButton")
 @onready var card_slots_hand: Node = get_tree().get_root().get_node("Game/CardManager/CardSlotsHand")
 @onready var card_slots_table: Node = get_tree().get_root().get_node("Game/CardManager/CardSlotsTable")
+@onready var card_slots_taken: Node = get_tree().get_root().get_node("Game/CardManager/CardSlotsTaken")
+@onready var card_slots_deck: Node = get_tree().get_root().get_node("Game/CardManager/CardSlotsDeck")
+@onready var _card_manager: CardManager = (
+	get_tree().get_first_node_in_group("card_manager") as CardManager
+)
 
 func _ready():
 	# Przypisanie sygnału do przycisku
@@ -12,12 +17,29 @@ func _ready():
 # Funkcja zmiany widoczności
 func _on_button_pressed():
 	if mode_button.pair_state == true && card_slots_hand.selected_cards.size() == 1 && card_slots_table.selected_cards.size() == 1:
-		pair()
+		pair(card_slots_hand.selected_cards[0], card_slots_table.selected_cards[0])
+	elif mode_button.pair_state == true && card_slots_hand.selected_cards.size() == 0 && card_slots_table.selected_cards.size() == 1:
+		pair(_card_manager.get_top_card(), card_slots_table.selected_cards[0])
 	elif mode_button.pair_state == false && card_slots_hand.selected_cards.size() > 0:
 		swap()
 
-func pair():
-	return
+func pair(card1: Card, card2: Card):
+	card_slots_taken.add_card(card1)
+	card_slots_taken.add_card(card2)
+	card_slots_hand.clear_selection()
+	card_slots_table.clear_selection()
+	var card: Card = _card_manager.get_top_card()
+	if card != null:
+		var pair: bool = false
+		for c in card_slots_table.get_cards():
+			if card.card_month == c.card_month:
+				card.swap_selection()
+				pair = true
+		if pair == false:
+			card_slots_table._populate_empty_slots(1)
+		else:
+			card_slots_deck.show_top()
+			_card_manager.swap_possibilities(card)
 	
 func swap():
 	var selected_counter: int = card_slots_hand.selected_cards.size()
@@ -28,3 +50,21 @@ func swap():
 		
 	card_slots_hand.clear_selection() 
 	card_slots_hand._populate_empty_slots(selected_counter)
+	
+#func pair_card_selection(card: Node) -> void:
+	#if card in selected_cards:
+		#selected_number -= 1
+		#selected_cards.erase(card)
+		#
+		#if card_slots_hand.selected_cards.size() == 1: #
+			#if card.card_month == _card_manager.get_top_card().card_month:
+				#card.swap_selection()
+			#else:
+				#card.deselect()
+		#else:
+			#card.deselect()
+		#
+	#elif selected_number < selection_limit && card.card_month == _card_manager.get_top_card().card_month:
+		#selected_number += 1
+		#selected_cards.append(card)
+		#card.select()

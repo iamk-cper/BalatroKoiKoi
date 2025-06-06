@@ -27,6 +27,7 @@ func _ready() -> void:
 	call_deferred("_populate_empty_slots", 9)  # uzupełniamy, gdy talia będzie gotowa
 
 func toggle_card_selection(card: Node) -> void:
+	var selected_cards_number: int = card_slots_hand.selected_cards.size()
 	if card in selected_cards:
 		selected_number -= 1
 		selected_cards.erase(card)
@@ -39,12 +40,12 @@ func toggle_card_selection(card: Node) -> void:
 		else:
 			card.deselect()
 		print("[DEBUG] Karta odznaczona w CardSlotsHand: ", card.card_id)
-		
-	elif selected_number < selection_limit && card.card_month == card_slots_hand.selected_cards[0].card_month:
-		selected_number += 1
-		selected_cards.append(card)
-		card.select()
-		print("[DEBUG] Karta zaznaczona w CardSlotsHand: ", card.card_id)
+	elif selected_cards_number > 0:
+		if selected_number < selection_limit && card.card_month == card_slots_hand.selected_cards[0].card_month:
+			selected_number += 1
+			selected_cards.append(card)
+			card.select()
+			print("[DEBUG] Karta zaznaczona w CardSlotsHand: ", card.card_id)
 	
 	print("[DEBUG] Aktualna liczba zaznaczonych kart: ", selected_cards.size())
 	print("[DEBUG] Lista zaznaczonych kart: ", get_selected_cards_ids())
@@ -111,6 +112,10 @@ func _populate_empty_slots(number_to_populate: int) -> void:
 	if _card_manager == null:
 		push_error("CardSlotsHand: CardManager NOT found")
 		return
+		
+	if _card_manager.get_top_card() == null:
+		push_error("CardSlotsHand: No more cards in deck")
+		return
 
 	for slot in get_children():
 		if populated_counter == populated_limit || number_to_populate == 0:
@@ -121,10 +126,6 @@ func _populate_empty_slots(number_to_populate: int) -> void:
 			continue
 
 		var card: Card = _card_manager.draw_card()
-		#print(card.print_card_info())
-		if card == null:
-			push_warning("CardSlotsHand: Deck empty – no card drawn")
-			continue
 
 		slot.add_child(card)
 		card.set_image_path()

@@ -50,7 +50,7 @@ func select() -> void:
 	if _material:
 		_material.set("shader_parameter/border_color", Color(1.0, 0.0, 0.0, 1.0))  # Czerwony
 	else:
-		print("problem z shaderem")
+		print("problem z shaderem czerwony")
 	print("Karta zaznaczona: ", card_id, " (", card_month, " - ", card_type, ")")
 	
 func swap_selection() -> void:
@@ -58,7 +58,7 @@ func swap_selection() -> void:
 	if _material:
 		_material.set("shader_parameter/border_color", Color(1.0, 1.0, 0.0, 1.0))  # Żółty
 	else:
-		print("problem z shaderem")
+		print("problem z shaderem zolty")
 	print("Karta możliwa do swapa: ", card_id, " (", card_month, " - ", card_type, ")")
 
 
@@ -67,14 +67,14 @@ func deselect() -> void:
 	if _material:
 		_material.set("shader_parameter/border_color", Color(1.0, 1.0, 1.0, 1.0))  # Biały
 	else:
-		print("problem z shaderem")
+		print("problem z shaderem bialy")
 	print("Karta odznaczona: ", card_id, " (", card_month, " - ", card_type, ")")
 
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.is_pressed():
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			var parent = get_parent().get_parent()
-			print("[DEBUG] Kliknięto kartę: " + card_id + " Parent name: " + parent.name)
+			print("[DEBUG] Kliknięto kartę: " + card_info())
 			if parent and (parent.name == "CardSlotsHand" || parent.name == "CardSlotsTable"):
-				print("Kliknięto kartę: ", card_id)
+				print("Kliknięto kartę: ", card_info())
 				parent.toggle_card_selection(self)
