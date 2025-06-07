@@ -16,10 +16,10 @@ func _ready():
 
 # Funkcja zmiany widoczności
 func _on_button_pressed():
-	if mode_button.pair_state == true && card_slots_hand.selected_cards.size() == 1 && card_slots_table.selected_cards.size() == 1:
+	if card_slots_deck.is_selected == true && card_slots_table.selected_cards.size() == 1:
+		pair_with_deck(_card_manager.draw_card(), card_slots_table.selected_cards[0])
+	elif mode_button.pair_state == true && card_slots_hand.selected_cards.size() == 1 && card_slots_table.selected_cards.size() == 1:
 		pair(card_slots_hand.selected_cards[0], card_slots_table.selected_cards[0])
-	elif mode_button.pair_state == true && card_slots_hand.selected_cards.size() == 0 && card_slots_table.selected_cards.size() == 1:
-		pair(_card_manager.get_top_card(), card_slots_table.selected_cards[0])
 	elif mode_button.pair_state == false && card_slots_hand.selected_cards.size() > 0:
 		swap()
 
@@ -28,18 +28,36 @@ func pair(card1: Card, card2: Card):
 	card_slots_taken.add_card(card2)
 	card_slots_hand.clear_selection()
 	card_slots_table.clear_selection()
+	card_slots_table.populated_counter -= 1
 	var card: Card = _card_manager.get_top_card()
+	print("Current top card is: %s", card.card_info())
 	if card != null:
-		var pair: bool = false
+		var pair_possibility: bool = false
 		for c in card_slots_table.get_cards():
+			#print("Card in card_slots_table is: ", c.card_info())
 			if card.card_month == c.card_month:
-				card.swap_selection()
-				pair = true
-		if pair == false:
+				pair_possibility = true
+		if pair_possibility == false:
+			print("Okej dodamy 1!")
 			card_slots_table._populate_empty_slots(1)
 		else:
-			card_slots_deck.show_top()
+			card_slots_deck.is_selected = true
 			_card_manager.swap_possibilities(card)
+			card_slots_deck.add_child(card)
+			card.position += Vector2(18, 0)
+			card.set_image_path()
+			card.select()
+			
+func pair_with_deck(card1: Card, card2: Card):
+	card_slots_deck.is_selected = false
+	card1.position += Vector2(-18, 0)
+	card_slots_taken.add_card(card1)
+	card_slots_taken.add_card(card2)
+	card_slots_hand.clear_selection()
+	card_slots_table.clear_selection()
+	card_slots_table.populated_counter -= 1
+	print("Current top card is: %s", _card_manager.get_top_card().card_info())
+	
 	
 func swap():
 	var selected_counter: int = card_slots_hand.selected_cards.size()

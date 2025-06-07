@@ -18,6 +18,7 @@ var ROW_Y = 0
 	get_tree().get_first_node_in_group("card_manager") as CardManager
 )
 @onready var card_slots_hand: Node = get_tree().get_root().get_node("Game/CardManager/CardSlotsHand")
+@onready var card_slots_deck: Node = get_tree().get_root().get_node("Game/CardManager/CardSlotsDeck")
 
 func _ready() -> void:
 	# Zapewnij, że ten Control ma rozmiar i jest widoczny
@@ -27,7 +28,7 @@ func _ready() -> void:
 	call_deferred("_populate_empty_slots", 9)  # uzupełniamy, gdy talia będzie gotowa
 
 func toggle_card_selection(card: Node) -> void:
-	var selected_cards_number: int = card_slots_hand.selected_cards.size()
+	var hand_selected_cards_number: int = card_slots_hand.selected_cards.size()
 	if card in selected_cards:
 		selected_number -= 1
 		selected_cards.erase(card)
@@ -37,15 +38,29 @@ func toggle_card_selection(card: Node) -> void:
 				card.swap_selection()
 			else:
 				card.deselect()
+		elif card_slots_deck.is_selected == true:
+			var top_deck_card: Node = get_tree().get_root().get_node("Game/CardManager/CardSlotsDeck/Card")
+			if card.card_month == top_deck_card.card_month:
+				card.swap_selection()
+			else:
+				card.deselect()
 		else:
 			card.deselect()
 		print("[DEBUG] Karta odznaczona w CardSlotsHand: ", card.card_id)
-	elif selected_cards_number > 0:
+	elif hand_selected_cards_number > 0:
 		if selected_number < selection_limit && card.card_month == card_slots_hand.selected_cards[0].card_month:
 			selected_number += 1
 			selected_cards.append(card)
 			card.select()
 			print("[DEBUG] Karta zaznaczona w CardSlotsHand: ", card.card_id)
+	elif hand_selected_cards_number == 0 && selected_cards.size() == 0 && card_slots_deck.is_selected == true:
+		var top_deck_card: Node = get_tree().get_root().get_node("Game/CardManager/CardSlotsDeck/Card")
+		if card.card_month == top_deck_card.card_month:
+			selected_number += 1
+			selected_cards.append(card)
+			card.select()
+			
+			
 	
 	print("[DEBUG] Aktualna liczba zaznaczonych kart: ", selected_cards.size())
 	print("[DEBUG] Lista zaznaczonych kart: ", get_selected_cards_ids())
@@ -138,7 +153,8 @@ func _populate_empty_slots(number_to_populate: int) -> void:
 func get_cards() -> Array:
 	var cards: Array = []
 	for slot in get_children():
-		for child in slot.get_children():
-			if child is Card:
-				cards.append(child)
+		var card := slot.get_node_or_null("Card")
+		if card:
+			cards.append(card)
+			#print("Table card info: " + card.card_info())
 	return cards

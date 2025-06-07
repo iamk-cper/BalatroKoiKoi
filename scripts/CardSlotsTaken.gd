@@ -8,6 +8,7 @@ class_name CardSlotsTaken
 
 const SLOT_SPACING: int = 350          # odstęp między slotami (w pikselach)
 const DISPLAY_SCALE: float = 0.08      # współczynnik skalowania
+const MAX_GROUP_SPACE: int = 43
 @export var ROW_Y = 0
 var hikari_cards: Array = []
 var tane_cards: Array = []
@@ -24,6 +25,38 @@ func _ready() -> void:
 	visible = true
 	#print("_ready CardSlotsTaken")
 	#call_deferred("_populate_empty_slots")  # uzupełniamy, gdy talia będzie gotowa
+	
+func correct_positions(card_type: String):
+	var card_groups = {
+		"Hikari": hikari_cards,
+		"Tane": tane_cards,
+		"Tanzaku": tanzaku_cards,
+		"Kasu": kasu_cards
+	}
+
+	var group: Array = card_groups.get(card_type, [])
+	var group_size: int = group.size()
+	print("group.size(): ", group.size())
+	if group_size == 0:
+		return
+
+	var group_node: Node = get_node(card_type)
+	var slots: Array = []
+	for child in group_node.get_children():
+		if child is CardSlot:
+			slots.append(child)
+
+	var start_x: float = 18.0
+
+	print("slots.size(): ", slots.size())
+	for i in range(slots.size()):
+		var x: float
+		if slots.size() == 1:
+			x = start_x
+		else:
+			x = start_x - MAX_GROUP_SPACE * i / (slots.size() - 1)
+
+		slots[i].position = Vector2(x, slots[i].position.y)
 
 func add_card(card: Card) -> void:
 	var group_name: String = card.card_type
@@ -37,27 +70,14 @@ func add_card(card: Card) -> void:
 		return
 
 	var index: int = group_node.get_child_count() - 1  # exclude TextureRect
-	var start_x: float = 0.0
 	var spacing_scaled: float = SLOT_SPACING * DISPLAY_SCALE
 
 	var slot: Control = card_slot_scene.instantiate() as Control
 	group_node.add_child(slot)
-
-	# Positioning
-	var y: float = texture_rect.position.y
-	var base_w: float = (slot as CardSlot).card_base_size.x
-	var scaled_w: float = base_w * DISPLAY_SCALE
-	var x: float = start_x + index * (scaled_w + spacing_scaled)
-
-	slot.position = Vector2(x, y)
-	slot.scale = Vector2.ONE * DISPLAY_SCALE
-
-	# Add card to slot
 	card.get_parent().remove_child(card)
 	slot.add_child(card)
-	
-	
 	card.set_image_path()
+	card.deselect()
 
 	# Add to type-specific list
 	match group_name:
@@ -69,5 +89,6 @@ func add_card(card: Card) -> void:
 			tanzaku_cards.append(card)
 		"Kasu":
 			kasu_cards.append(card)
-
-	print("[DEBUG] Dodano kartę '%s' do grupy '%s' na pozycji (%.1f, %.1f)" % [card.card_info(), group_name, x, y])
+	
+	correct_positions(group_name)
+	#print("[DEBUG] Dodano kartę '%s' do grupy '%s' na pozycji (%.1f, %.1f)" % [card.card_info(), group_name, x, y])
