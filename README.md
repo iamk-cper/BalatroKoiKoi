@@ -98,6 +98,9 @@
 * **UC-3: Ponowna rozgrywka** - Gracz po zakończonej rozgrywce rozpoczyna kolejną.
 * **UC-4: Sprawdzenie zasad** - Gracz uruchamia grę i z poziomu menu wchodzi w zasady. Następnie wychodzi z zasad i opuszcza aplikację lub rozpoczyna rozgrywkę.
 
+  ![image](https://github.com/user-attachments/assets/f7cd6b6c-2fa1-49da-81fa-725dd6694325)
+
+
 ## Architektura
 
 * **Struktura gry:** Architektura opiera się na silniku Godot i wykorzystuje sceny oraz węzły (Node) do podziału funkcjonalności:
