@@ -113,7 +113,11 @@
 * **Moduły i skrypty:** Każdy główny węzeł posiada przypisany skrypt GDScript realizujący jego zadania, np.
     * Skrypt CardManager.gd - zawiera logikę rozgrywki w trakcie rundy: tasowanie talii, rozdawanie kart, sprawdzanie dopasowań, naliczanie punktów, wykrywanie Yaku, obsługę decyzji Koi-Koi oraz kończenie rundy.
 
-### Przykładowy fragment architektury
+### Architektura aplikacji
+![image](https://github.com/user-attachments/assets/fdc3b4f1-c5f0-4cb9-b183-e92eb1f51f96)
+
+
+### Przykładowy fragment struktury aplikacji
 ![image](https://github.com/user-attachments/assets/3876224c-b070-466b-a67a-0cb366858ea9)
 
 
