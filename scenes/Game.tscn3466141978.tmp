@@ -1,0 +1,106 @@
+[gd_scene load_steps=12 format=3 uid="uid://bnamcqs2twi8p"]
+
+[ext_resource type="Texture2D" uid="uid://b24kcfnurcu0e" path="res://assets/54ff1f32-712d-4a4f-a5c2-d052ece7437d.jpg" id="1_ibkli"]
+[ext_resource type="PackedScene" uid="uid://bw5i0jbg0ln80" path="res://scenes/CardManager.tscn" id="2_qbsmt"]
+[ext_resource type="Texture2D" uid="uid://c5klnjvri4fxx" path="res://assets/others/swap.png" id="3_78awf"]
+[ext_resource type="Script" uid="uid://diw6hx4c87xh6" path="res://scripts/ModeButton.gd" id="3_s0nni"]
+[ext_resource type="Texture2D" uid="uid://bbbt8ba28ng8s" path="res://assets/others/pair.png" id="4_s0nni"]
+[ext_resource type="Texture2D" uid="uid://bub6iltsrylpq" path="res://assets/others/blank.png" id="6_400sg"]
+[ext_resource type="PackedScene" uid="uid://bil5j51fj6yjg" path="res://scenes/hand_swap.tscn" id="6_aug50"]
+[ext_resource type="PackedScene" uid="uid://ci3am04seegkf" path="res://scenes/peek.tscn" id="7_400sg"]
+[ext_resource type="PackedScene" uid="uid://wx1mptpdlm5e" path="res://scenes/draw.tscn" id="8_g4kob"]
+[ext_resource type="PackedScene" uid="uid://b8t8233xnte3y" path="res://scenes/table_pair.tscn" id="9_g4kob"]
+[ext_resource type="Script" uid="uid://bv74pf10a4kvp" path="res://scripts/AcceptButton.gd" id="10_3xj3m"]
+
+[node name="Game" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="TextureRect" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.192157)
+position = Vector2(641, 359.5)
+scale = Vector2(0.665974, 0.665741)
+texture = ExtResource("1_ibkli")
+
+[node name="CardManager" parent="." instance=ExtResource("2_qbsmt")]
+
+[node name="GUI" type="Node2D" parent="."]
+
+[node name="ModeButton" type="Control" parent="GUI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_s0nni")
+
+[node name="SwapButton" type="TextureRect" parent="GUI/ModeButton"]
+layout_mode = 0
+offset_left = 467.0
+offset_top = 630.0
+offset_right = 697.0
+offset_bottom = 739.0
+texture = ExtResource("3_78awf")
+expand_mode = 1
+
+[node name="PairButton" type="TextureRect" parent="GUI/ModeButton"]
+layout_mode = 0
+offset_left = 467.0
+offset_top = 630.0
+offset_right = 697.0
+offset_bottom = 739.0
+texture = ExtResource("4_s0nni")
+expand_mode = 1
+
+[node name="Button" type="Button" parent="GUI/ModeButton"]
+layout_mode = 0
+offset_left = 484.0
+offset_top = 658.0
+offset_right = 682.0
+offset_bottom = 711.0
+
+[node name="SpecialOptions" type="Control" parent="GUI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HandSwap" parent="GUI/SpecialOptions" instance=ExtResource("6_aug50")]
+
+[node name="Peek" parent="GUI/SpecialOptions" instance=ExtResource("7_400sg")]
+offset_top = 66.0
+offset_bottom = 106.0
+
+[node name="Draw" parent="GUI/SpecialOptions" instance=ExtResource("8_g4kob")]
+offset_left = 150.0
+offset_right = 190.0
+
+[node name="TablePair" parent="GUI/SpecialOptions" instance=ExtResource("9_g4kob")]
+offset_left = 150.0
+offset_top = 66.0
+offset_right = 190.0
+offset_bottom = 106.0
+
+[node name="AcceptButton" type="Control" parent="GUI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("10_3xj3m")
+card_slots_hand = null
+
+[node name="CardNumberBackground" type="TextureRect" parent="GUI/AcceptButton"]
+layout_mode = 0
+offset_left = 682.0
+offset_top = 630.0
+offset_right = 913.0
+offset_bottom = 741.0
+texture = ExtResource("6_400sg")
+expand_mode = 1
+
+[node name="Button" type="Button" parent="GUI/AcceptButton"]
+layout_mode = 0
+offset_left = 699.0
+offset_top = 658.0
+offset_right = 897.0
+offset_bottom = 711.0

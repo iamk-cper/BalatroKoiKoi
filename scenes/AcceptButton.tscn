@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://b335l6t4calv5"]
+
+[ext_resource type="PackedScene" uid="uid://cfixbowc3f1b3" path="res://scenes/bigger_button.tscn" id="1_8d03v"]
+[ext_resource type="Script" uid="uid://bv74pf10a4kvp" path="res://scripts/AcceptButton.gd" id="2_hiplj"]
+
+[node name="AcceptButton" instance=ExtResource("1_8d03v")]
+script = ExtResource("2_hiplj")

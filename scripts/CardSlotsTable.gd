@@ -141,6 +141,10 @@ func _populate_empty_slots(number_to_populate: int) -> void:
 			continue
 
 		var card: Card = _card_manager.draw_card()
+		
+		if card == null:
+			print("CardSlotsHand: Deck empty – no card drawn")
+			return
 
 		slot.add_child(card)
 		card.set_image_path()

@@ -117,6 +117,6 @@ func _is_card_taken(card_id: String, tex: TextureRect) -> void:
 				return
 	for card in _card_manager.lost_cards:
 		if card.card_id == card_id:
-			tex.modulate = Color(0.2, 0.2, 0.2, 1)
+			tex.modulate = Color(0.10, 0.10, 0.10, 1)
 			return
-	tex.modulate = Color(0.6, 0.6, 0.6, 1)
+	tex.modulate = Color(0.58, 0.58, 0.58, 1)

@@ -8,9 +8,11 @@ extends Control
 @onready var switch_button = $Button
 @onready var card_slots_table: Node = get_tree().get_root().get_node("Game/CardManager/CardSlotsTable")
 @onready var card_slots_hand: Node = get_tree().get_root().get_node("Game/CardManager/CardSlotsHand")
+@onready var card_slots_deck: Node = get_tree().get_root().get_node("Game/CardManager/CardSlotsDeck")
 @onready var _card_manager: CardManager = (
 	get_tree().get_first_node_in_group("card_manager") as CardManager
 )
+
 
 # Aktualny stan widoczności
 var is_texture1_visible: bool = false
@@ -26,7 +28,7 @@ func _ready():
 # Funkcja zmiany widoczności
 func _on_button_pressed():
 	_update_visibility()
-	if pair_state == true:
+	if pair_state == true && card_slots_deck.is_selected == false:
 		card_slots_table.clear_selection()
 	elif card_slots_hand.selected_cards.size() == 1:
 		_card_manager.swap_possibilities(card_slots_hand.selected_cards[0])

@@ -7,7 +7,7 @@ func _ready() -> void:
 	_update_count()
 	card_slots_taken.connect("taken_changed", _on_taken_changed)
 
-func _on_taken_changed(group_name: String, count: int) -> void:
+func _on_taken_changed(_group_name: String, _count: int) -> void:
 	_update_count()
 
 func _update_count() -> void:

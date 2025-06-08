@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfixbowc3f1b3"]
+
+[ext_resource type="Texture2D" uid="uid://bub6iltsrylpq" path="res://assets/others/blank.png" id="1_yiuuc"]
+
+[node name="BiggerButton" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CardNumberBackground" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 231.0
+offset_bottom = 111.0
+texture = ExtResource("1_yiuuc")
+expand_mode = 1
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 28.0
+offset_right = 215.0
+offset_bottom = 81.0
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 34.0
+offset_right = 204.0
+offset_bottom = 76.0

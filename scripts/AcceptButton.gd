@@ -29,6 +29,7 @@ func pair(card1: Card, card2: Card):
 	card_slots_hand.clear_selection()
 	card_slots_table.clear_selection()
 	card_slots_table.populated_counter -= 1
+	card_slots_hand.populated_counter -= 1
 	var card: Card = _card_manager.get_top_card()
 	if card != null:
 		print("Current top card is: %s", card.card_info())
@@ -47,6 +48,21 @@ func pair(card1: Card, card2: Card):
 			card.position += Vector2(18, 0)
 			card.set_image_path()
 			card.select()
+	
+	if card_slots_table.get_cards().is_empty():
+		print("You have no more cards on the table...")
+		_card_manager.finish_game()
+	elif card_slots_hand.get_cards().is_empty():
+		print("You have no more cards on the table...")
+		_card_manager.finish_game()
+	elif _card_manager.deck.is_empty():
+		print("You paired, deck is empty")
+		if !_card_manager.is_pairing_possible():
+			print("You have no more pairing possibilities...")
+			_card_manager.finish_game()
+	else:
+		print("Card_slots_table.get_cards().size(): ", card_slots_table.get_cards().size())
+		print("Card_slots_hand.get_cards().size():", card_slots_hand.get_cards().size())
 			
 func pair_with_deck(card1: Card, card2: Card):
 	card_slots_deck.is_selected = false
@@ -56,8 +72,18 @@ func pair_with_deck(card1: Card, card2: Card):
 	card_slots_hand.clear_selection()
 	card_slots_table.clear_selection()
 	card_slots_table.populated_counter -= 1
-	print("Current top card is: %s", _card_manager.get_top_card().card_info())
-	
+	#print("Current top card is: %s", _card_manager.get_top_card().card_info())
+	if card_slots_table.get_cards().is_empty():
+		print("You have no more cards on the table...")
+		_card_manager.finish_game()
+	elif card_slots_hand.get_cards().is_empty():
+		print("You have no more cards on the table...")
+		_card_manager.finish_game()
+	elif _card_manager.deck.is_empty():
+		print("You paired with deck, now deck is empty")
+		if !_card_manager.is_pairing_possible():
+			print("You have no more pairing possibilities...")
+			_card_manager.finish_game()
 	
 func swap():
 	var selected_counter: int = card_slots_hand.selected_cards.size()
@@ -68,6 +94,15 @@ func swap():
 		
 	card_slots_hand.clear_selection() 
 	card_slots_hand._populate_empty_slots(selected_counter)
+	
+	if card_slots_hand.get_cards().is_empty():
+		print("You have no more cards on in the hand...")
+		_card_manager.finish_game()
+	elif _card_manager.deck.is_empty():
+		print("You swapped, deck is empty")
+		if !_card_manager.is_pairing_possible():
+			print("You have no more pairing possibilities...")
+			_card_manager.finish_game()
 	
 #func pair_card_selection(card: Node) -> void:
 	#if card in selected_cards:
