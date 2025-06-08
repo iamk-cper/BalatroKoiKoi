@@ -6,12 +6,10 @@ extends Control
 @onready var texture1 = $SwapButton
 @onready var texture2 = $PairButton
 @onready var switch_button = $Button
-@onready var card_slots_table: Node = get_tree().get_root().get_node("Game/CardManager/CardSlotsTable")
-@onready var card_slots_hand: Node = get_tree().get_root().get_node("Game/CardManager/CardSlotsHand")
-@onready var card_slots_deck: Node = get_tree().get_root().get_node("Game/CardManager/CardSlotsDeck")
-@onready var _card_manager: CardManager = (
-	get_tree().get_first_node_in_group("card_manager") as CardManager
-)
+@onready var card_slots_table: Node = get_tree().get_root().get_node("Main/Game/CardManager/CardSlotsTable")
+@onready var card_slots_hand: Node = get_tree().get_root().get_node("Main/Game/CardManager/CardSlotsHand")
+@onready var card_slots_deck: Node = get_tree().get_root().get_node("Main/Game/CardManager/CardSlotsDeck")
+@onready var _card_manager: CardManager = get_tree().get_root().get_node("Main/Game/CardManager")
 
 
 # Aktualny stan widoczności

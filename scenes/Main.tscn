@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cocr7fojqdni0"]
+
+[ext_resource type="Script" uid="uid://dphs7rufkv8bw" path="res://scripts/main.gd" id="1_elqb8"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_elqb8")

@@ -15,12 +15,10 @@ const ROW_Y: int = 515                 # pozycja w pionie
 var selection_limit: int = 1
 var selected_number: int = 0
 
-@onready var _card_manager: CardManager = (
-	get_tree().get_first_node_in_group("card_manager") as CardManager
-)
-@onready var mode_button: Node = get_tree().get_root().get_node("Game/GUI/ModeButton")
-@onready var card_slots_table: Node = get_tree().get_root().get_node("Game/CardManager/CardSlotsTable")
-@onready var card_slots_deck: Node = get_tree().get_root().get_node("Game/CardManager/CardSlotsDeck")
+@onready var _card_manager: CardManager = get_tree().get_root().get_node("Main/Game/CardManager")
+@onready var mode_button: Node = get_tree().get_root().get_node("Main/Game/GUI/ModeButton")
+@onready var card_slots_table: Node = get_tree().get_root().get_node("Main/Game/CardManager/CardSlotsTable")
+@onready var card_slots_deck: Node = get_tree().get_root().get_node("Main/Game/CardManager/CardSlotsDeck")
 
 # Funkcja do zaznaczania karty
 func toggle_card_selection(card: Node) -> void:

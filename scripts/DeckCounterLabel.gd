@@ -3,9 +3,7 @@ extends Label
 ##  Wyświetla liczbę kart pozostałych w talii.
 ##
 
-@onready var _card_manager: CardManager = (
-	get_tree().get_first_node_in_group("card_manager") as CardManager
-)
+@onready var _card_manager: CardManager = get_tree().get_root().get_node("Main/Game/CardManager")
 
 func _ready() -> void:
 	if _card_manager:

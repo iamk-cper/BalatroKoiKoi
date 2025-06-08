@@ -5,9 +5,9 @@ class_name CardManager
 
 @export var card_scene:     PackedScene = preload("res://scenes/Card.tscn")
 
-@onready var card_slots_hand: Node = get_tree().get_root().get_node("Game/CardManager/CardSlotsHand")
-@onready var card_slots_table: Node = get_tree().get_root().get_node("Game/CardManager/CardSlotsTable")
-@onready var card_slots_taken: Node = get_tree().get_root().get_node("Game/CardManager/CardSlotsTaken")
+@onready var card_slots_hand: Node = get_tree().get_root().get_node("Main/Game/CardManager/CardSlotsHand")
+@onready var card_slots_table: Node = get_tree().get_root().get_node("Main/Game/CardManager/CardSlotsTable")
+@onready var card_slots_taken: Node = get_tree().get_root().get_node("Main/Game/CardManager/CardSlotsTaken")
 
 signal deck_changed(remaining: int)
 
@@ -109,12 +109,17 @@ func finish_game() -> void:
 	# Przyciski - instancje
 	var play_again_button: Control = bigger_button_scene.instantiate()
 	var close_button: Control = bigger_button_scene.instantiate()
+	var main_menu_button: Control = bigger_button_scene.instantiate()
 
 	# Konfiguracja przycisków
 	play_again_button.name = "PlayAgainButton"
 	play_again_button.get_node("Button").text = "Play again"
 	play_again_button.get_node("Button").pressed.connect(new_game)
 
+	main_menu_button.name = "MainMenuButton"
+	main_menu_button.get_node("Button").text = "MainMenu"
+	main_menu_button.get_node("Button").pressed.connect(main_menu)
+	
 	close_button.name = "CloseButton"
 	close_button.get_node("Button").text = "Close"
 	close_button.get_node("Button").pressed.connect(close)
@@ -123,15 +128,17 @@ func finish_game() -> void:
 	var screen_size = get_viewport_rect().size
 	var button_size = Vector2(231, 111)
 
-	var total_width = button_size.x * 2
+	var total_width = button_size.x * 3
 	var start_x = (screen_size.x - total_width) / 2
 	var y = screen_size.y - button_size.y  # 30px od dolnej krawędzi
 
 	# Pozycje z marginesem
 	play_again_button.position = Vector2(start_x, y)
-	close_button.position = Vector2(start_x + button_size.x, y)
+	main_menu_button.position = Vector2(start_x + button_size.x, y)
+	close_button.position = Vector2(start_x + 2 * button_size.x, y)
 
 	# Dodaj przyciski do overlaya
+	overlay.add_child(main_menu_button)
 	overlay.add_child(play_again_button)
 	overlay.add_child(close_button)
 
@@ -141,6 +148,12 @@ func close() -> void:
 
 func new_game() -> void:
 	print("Starting a new game...")
+	var main = get_tree().get_root().get_node("Main")
+	if main:
+		main.start_game()
+	
+func main_menu() -> void:
+	print("Going back to main menu...")
 	get_tree().reload_current_scene()
 
 

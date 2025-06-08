@@ -1,5 +1,7 @@
 extends Control
 
+@export var bigger_button_scene: PackedScene = preload("res://scenes/bigger_button.tscn")
+
 const SCALE := 0.08
 const CARD_BASE_SIZE := Vector2(976, 1600)
 const CARD_SIZE := CARD_BASE_SIZE * SCALE
@@ -12,10 +14,8 @@ const TOTAL_COLUMNS := 6
 const CARD_GAP := Vector2(5,5)       # Odstępy między kartami w 2x2
 const MONTH_GAP := Vector2(30,30)    # Odstępy między blokami miesięcy
 
-@onready var card_slots_taken: CardSlotsTaken = get_tree().get_root().get_node("Game/CardManager/CardSlotsTaken")
-@onready var _card_manager: CardManager = (
-	get_tree().get_first_node_in_group("card_manager") as CardManager
-)
+@onready var card_slots_taken: CardSlotsTaken = get_tree().get_root().get_node("Main/Game/CardManager/CardSlotsTaken")
+@onready var _card_manager: CardManager = get_tree().get_root().get_node("Main/Game/CardManager")
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
@@ -23,6 +23,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 func _ready():
 	_create_overlay()
+	_add_close_button()
 	_generate_all_cards()
 
 func _create_overlay():
@@ -44,10 +45,21 @@ func _create_overlay():
 
 	add_child(overlay)
 
+func _add_close_button():
+	var screen_size = get_viewport_rect().size
+	var button_size = Vector2(231, 111)  # Rozmiar zgodny z bigger_button.tscn
 
+	var close_button: Control = bigger_button_scene.instantiate()
+	close_button.name = "CloseButton"
+	close_button.get_node("Button").text = "Close"
+	close_button.get_node("Button").pressed.connect(func(): queue_free())
 
+	# Wyśrodkuj na dole
+	var x = (screen_size.x - button_size.x) / 2
+	var y = screen_size.y - button_size.y
+	close_button.position = Vector2(x, y)
 
-
+	add_child(close_button)
 
 func _generate_all_cards():
 	var card_data := {

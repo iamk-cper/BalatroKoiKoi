@@ -3,8 +3,8 @@ class_name CardSlotsTaken
 
 @export var card_slot_scene: PackedScene = preload("res://scenes/CardSlot.tscn")
 @export var card_scene:     PackedScene = preload("res://scenes/Card.tscn")
-@onready var card_slots_hand: Node = get_tree().get_root().get_node("Game/CardManager/CardSlotsHand")
-@onready var card_slots_table: Node = get_tree().get_root().get_node("Game/CardManager/CardSlotsTable")
+@onready var card_slots_hand: Node = get_tree().get_root().get_node("Main/Game/CardManager/CardSlotsHand")
+@onready var card_slots_table: Node = get_tree().get_root().get_node("Main/Game/CardManager/CardSlotsTable")
 
 const SLOT_SPACING: int = 350          # odstęp między slotami (w pikselach)
 const DISPLAY_SCALE: float = 0.08      # współczynnik skalowania

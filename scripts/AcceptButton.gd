@@ -1,14 +1,12 @@
 extends Control
 
 @onready var switch_button = $Button
-@onready var mode_button: Node = get_tree().get_root().get_node("Game/GUI/ModeButton")
-@onready var card_slots_hand: Node = get_tree().get_root().get_node("Game/CardManager/CardSlotsHand")
-@onready var card_slots_table: Node = get_tree().get_root().get_node("Game/CardManager/CardSlotsTable")
-@onready var card_slots_taken: Node = get_tree().get_root().get_node("Game/CardManager/CardSlotsTaken")
-@onready var card_slots_deck: Node = get_tree().get_root().get_node("Game/CardManager/CardSlotsDeck")
-@onready var _card_manager: CardManager = (
-	get_tree().get_first_node_in_group("card_manager") as CardManager
-)
+@onready var mode_button: Node = get_tree().get_root().get_node("Main/Game/GUI/ModeButton")
+@onready var card_slots_hand: Node = get_tree().get_root().get_node("Main/Game/CardManager/CardSlotsHand")
+@onready var card_slots_table: Node = get_tree().get_root().get_node("Main/Game/CardManager/CardSlotsTable")
+@onready var card_slots_taken: Node = get_tree().get_root().get_node("Main/Game/CardManager/CardSlotsTaken")
+@onready var card_slots_deck: Node = get_tree().get_root().get_node("Main/Game/CardManager/CardSlotsDeck")
+@onready var _card_manager: CardManager = get_tree().get_root().get_node("Main/Game/CardManager")
 
 func _ready():
 	# Przypisanie sygnału do przycisku

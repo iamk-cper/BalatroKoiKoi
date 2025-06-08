@@ -14,11 +14,9 @@ const SLOT_SPACING: int = 120          # odstęp między slotami (w pikselach)
 const DISPLAY_SCALE: float = 0.08      # współczynnik skalowania
 var ROW_Y = 0
 
-@onready var _card_manager: CardManager = (
-	get_tree().get_first_node_in_group("card_manager") as CardManager
-)
-@onready var card_slots_hand: Node = get_tree().get_root().get_node("Game/CardManager/CardSlotsHand")
-@onready var card_slots_deck: Node = get_tree().get_root().get_node("Game/CardManager/CardSlotsDeck")
+@onready var _card_manager: CardManager = get_tree().get_root().get_node("Main/Game/CardManager")
+@onready var card_slots_hand: Node = get_tree().get_root().get_node("Main/Game/CardManager/CardSlotsHand")
+@onready var card_slots_deck: Node = get_tree().get_root().get_node("Main/Game/CardManager/CardSlotsDeck")
 
 func _ready() -> void:
 	# Zapewnij, że ten Control ma rozmiar i jest widoczny
@@ -39,7 +37,7 @@ func toggle_card_selection(card: Node) -> void:
 			else:
 				card.deselect()
 		elif card_slots_deck.is_selected == true:
-			var top_deck_card: Node = get_tree().get_root().get_node("Game/CardManager/CardSlotsDeck/Card")
+			var top_deck_card: Node = get_tree().get_root().get_node("Main/Game/CardManager/CardSlotsDeck/Card")
 			if card.card_month == top_deck_card.card_month:
 				card.swap_selection()
 			else:
@@ -54,7 +52,7 @@ func toggle_card_selection(card: Node) -> void:
 			card.select()
 			print("[DEBUG] Karta zaznaczona w CardSlotsHand: ", card.card_id)
 	elif hand_selected_cards_number == 0 && selected_cards.size() == 0 && card_slots_deck.is_selected == true:
-		var top_deck_card: Node = get_tree().get_root().get_node("Game/CardManager/CardSlotsDeck/Card")
+		var top_deck_card: Node = get_tree().get_root().get_node("Main/Game/CardManager/CardSlotsDeck/Card")
 		if card.card_month == top_deck_card.card_month:
 			selected_number += 1
 			selected_cards.append(card)

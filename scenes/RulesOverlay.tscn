@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bp8wdsmaamwyp"]
+
+[ext_resource type="Script" uid="uid://cd4owyfqve5yq" path="res://scripts/rules_overlay.gd" id="1_7e058"]
+
+[node name="RulesOverlay" type="ColorRect"]
+script = ExtResource("1_7e058")

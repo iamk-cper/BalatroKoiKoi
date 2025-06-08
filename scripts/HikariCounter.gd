@@ -1,6 +1,6 @@
 extends Label
 
-@onready var card_slots_taken: Node = get_tree().get_root().get_node("Game/CardManager/CardSlotsTaken")
+@onready var card_slots_taken: Node = get_tree().get_root().get_node("Main/Game/CardManager/CardSlotsTaken")
 @onready var group_type: String = get_parent().get_parent().name  # Zakładamy że np. Hikari, Tane, ...
 
 func _ready() -> void:
