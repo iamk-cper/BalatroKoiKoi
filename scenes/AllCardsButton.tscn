@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cqqrsv5wc3a3p"]
+[gd_scene load_steps=3 format=3 uid="uid://cqqrsv5wc3a3p"]
 
 [ext_resource type="PackedScene" uid="uid://culvrb7cx8gms" path="res://scenes/DataButton.tscn" id="1_dbhxa"]
+[ext_resource type="Script" uid="uid://ca88k21ikljvk" path="res://scripts/card_number.gd" id="2_hlbbv"]
 
 [node name="AllCardsButton" instance=ExtResource("1_dbhxa")]
 
@@ -10,3 +11,4 @@ offset_right = 251.0
 [node name="CardNumber" parent="." index="1"]
 offset_left = 35.0
 offset_right = 217.0
+script = ExtResource("2_hlbbv")

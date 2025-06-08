@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://5rhf4jdjd1kd"]
+
+[ext_resource type="PackedScene" uid="uid://culvrb7cx8gms" path="res://scenes/DataButton.tscn" id="1_ijiux"]
+[ext_resource type="Script" uid="uid://oouo23p51apx" path="res://scripts/DeckCounterLabel.gd" id="2_tut5g"]
+
+[node name="DeckCounterButton" instance=ExtResource("1_ijiux")]
+
+[node name="CardNumber" parent="." index="1"]
+script = ExtResource("2_tut5g")

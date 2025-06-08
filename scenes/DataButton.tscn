@@ -1,22 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://culvrb7cx8gms"]
+[gd_scene load_steps=2 format=3 uid="uid://culvrb7cx8gms"]
 
 [ext_resource type="Texture2D" uid="uid://bub6iltsrylpq" path="res://assets/others/blank.png" id="1_b0mbd"]
-[ext_resource type="Script" uid="uid://oouo23p51apx" path="res://scripts/DeckCounterLabel.gd" id="2_x2eth"]
 
 [node name="DataButton" type="Node2D"]
 
 [node name="CardNumberBackground" type="TextureRect" parent="."]
+offset_top = 106.0
 offset_right = 114.0
-offset_bottom = 95.0
+offset_bottom = 201.0
 texture = ExtResource("1_b0mbd")
 expand_mode = 1
 
 [node name="CardNumber" type="Label" parent="."]
 offset_left = 17.96
-offset_top = 33.0
+offset_top = 139.0
 offset_right = 95.96
-offset_bottom = 62.0
+offset_bottom = 168.0
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
-script = ExtResource("2_x2eth")

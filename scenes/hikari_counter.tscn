@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7qwqrq53756a"]
+
+[ext_resource type="PackedScene" uid="uid://culvrb7cx8gms" path="res://scenes/DataButton.tscn" id="1_7j64k"]
+[ext_resource type="Script" uid="uid://bxmg56tea2tcv" path="res://scripts/HikariCounter.gd" id="2_lfrdk"]
+
+[node name="GroupCounter" instance=ExtResource("1_7j64k")]
+
+[node name="CardNumberBackground" parent="." index="0"]
+offset_left = -13.0
+offset_right = 127.0
+
+[node name="CardNumber" parent="." index="1"]
+offset_left = 9.0
+offset_right = 104.0
+script = ExtResource("2_lfrdk")

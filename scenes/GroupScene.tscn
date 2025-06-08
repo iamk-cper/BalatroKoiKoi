@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8xeyi4vgvmba"]
+
+[ext_resource type="Texture2D" uid="uid://b1trxr0my4lrk" path="res://assets/cards/Hanafuda blank card Alt.svg" id="1_q81q5"]
+[ext_resource type="PackedScene" uid="uid://b7qwqrq53756a" path="res://scenes/hikari_counter.tscn" id="2_dqqr4"]
+
+[node name="GroupScene" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = 18.0
+offset_right = 994.0
+offset_bottom = 1600.0
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("1_q81q5")
+
+[node name="GroupCounter" parent="." instance=ExtResource("2_dqqr4")]

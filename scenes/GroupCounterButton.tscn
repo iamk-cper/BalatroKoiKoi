@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfv88f8upy3t2"]
+
+[ext_resource type="PackedScene" uid="uid://bccmvl6xdtlji" path="res://scenes/CardSlotsDeck.tscn" id="1_kwcax"]
+[ext_resource type="PackedScene" uid="uid://b7qwqrq53756a" path="res://scenes/hikari_counter.tscn" id="2_u0wfv"]
+
+[node name="GroupCounter" instance=ExtResource("1_kwcax")]
+
+[node name="DeckCounterButton" parent="." index="1"]
+visible = false
+
+[node name="GroupCounter" parent="." index="2" instance=ExtResource("2_u0wfv")]

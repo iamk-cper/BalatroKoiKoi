@@ -13,6 +13,7 @@ var deck: Array[Card] = []
 
 ## Karty już wykorzystane
 var discarded: Array[Card] = []
+var lost_cards: Array = []
 
 const MONTHS: PackedStringArray = [
 	"January", "February", "March", "April", "May", "June",

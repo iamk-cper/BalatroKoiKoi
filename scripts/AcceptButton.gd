@@ -30,8 +30,8 @@ func pair(card1: Card, card2: Card):
 	card_slots_table.clear_selection()
 	card_slots_table.populated_counter -= 1
 	var card: Card = _card_manager.get_top_card()
-	print("Current top card is: %s", card.card_info())
 	if card != null:
+		print("Current top card is: %s", card.card_info())
 		var pair_possibility: bool = false
 		for c in card_slots_table.get_cards():
 			#print("Card in card_slots_table is: ", c.card_info())
@@ -64,7 +64,7 @@ func swap():
 	card_slots_hand.populated_counter -= selected_counter
 	for card in card_slots_hand.selected_cards:
 		card.get_parent().remove_child(card)
-		card.queue_free()
+		_card_manager.lost_cards.append(card)
 		
 	card_slots_hand.clear_selection() 
 	card_slots_hand._populate_empty_slots(selected_counter)

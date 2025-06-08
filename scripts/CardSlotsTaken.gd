@@ -16,9 +16,7 @@ var tanzaku_cards: Array = []
 var kasu_cards: Array = []
 var count = 4
 
-@onready var _card_manager: CardManager = (
-	get_tree().get_first_node_in_group("card_manager") as CardManager
-)
+signal taken_changed(group_name: String, count: int)
 
 func _ready() -> void:
 	# Zapewnij, że ten Control ma rozmiar i jest widoczny
@@ -51,12 +49,21 @@ func correct_positions(card_type: String):
 	print("slots.size(): ", slots.size())
 	for i in range(slots.size()):
 		var x: float
+		var y: float = - i * 2.8
 		if slots.size() == 1:
 			x = start_x
+		elif slots.size() < 6:
+			x = start_x - MAX_GROUP_SPACE * float(i) / float(slots.size())
+		elif slots.size() > 12:
+			if i <= 12:
+				x = start_x - MAX_GROUP_SPACE * float(i) / float(slots.size() - 1)
+			else:
+				x = start_x - MAX_GROUP_SPACE * 12.0 / float(slots.size() - 1)
+				y = - 12 * 2.8
 		else:
-			x = start_x - MAX_GROUP_SPACE * i / (slots.size() - 1)
+			x = start_x - MAX_GROUP_SPACE * float(i) / float(slots.size() - 1)
 
-		slots[i].position = Vector2(x, slots[i].position.y)
+		slots[i].position = Vector2(x, y)
 
 func add_card(card: Card) -> void:
 	var group_name: String = card.card_type
@@ -69,8 +76,8 @@ func add_card(card: Card) -> void:
 		push_warning("Nie znaleziono TextureRect w %s" % group_node)
 		return
 
-	var index: int = group_node.get_child_count() - 1  # exclude TextureRect
-	var spacing_scaled: float = SLOT_SPACING * DISPLAY_SCALE
+	#var index: int = group_node.get_child_count() - 1  # exclude TextureRect
+	#var spacing_scaled: float = SLOT_SPACING * DISPLAY_SCALE
 
 	var slot: Control = card_slot_scene.instantiate() as Control
 	group_node.add_child(slot)
@@ -83,12 +90,16 @@ func add_card(card: Card) -> void:
 	match group_name:
 		"Hikari":
 			hikari_cards.append(card)
+			emit_signal("taken_changed", group_name, hikari_cards.size())
 		"Tane":
 			tane_cards.append(card)
+			emit_signal("taken_changed", group_name, tane_cards.size())
 		"Tanzaku":
 			tanzaku_cards.append(card)
+			emit_signal("taken_changed", group_name, tanzaku_cards.size())
 		"Kasu":
 			kasu_cards.append(card)
+			emit_signal("taken_changed", group_name, kasu_cards.size())
 	
 	correct_positions(group_name)
 	#print("[DEBUG] Dodano kartę '%s' do grupy '%s' na pozycji (%.1f, %.1f)" % [card.card_info(), group_name, x, y])
