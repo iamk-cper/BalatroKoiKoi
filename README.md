@@ -8,6 +8,8 @@
 * **Repozytorium:** Kod źródłowy gry jest dostępny w repozytorium GitHub: BalatroKoiKoi (link: https://github.com/iamk-cper/BalatroKoiKoi). Repozytorium zawiera aktualną wersję gry (0.1.0) wraz z historią zmian i planowanymi usprawnieniami.
 * **Status projektu:** Wersja alfa 0.1.0 (grywalna podstawowa wersja). Dokumentacja opisuje stan na wersję 0.1.0 oraz przewiduje dalszy rozwój funkcjonalności.
 
+![image](https://github.com/user-attachments/assets/84c66bf5-b5da-4069-ad89-4f9a22655100)
+
 ## Zasady gry
 
 * **Cel gry:** Zdobywanie punktów poprzez tworzenie wartościowych kombinacji kart. Gra kończy się wygraną po pomyślnym ukończeniu finałowej rundy (osiągnięciu wszystkich zaplanowanych etapów) lub przegraną, jeśli gracz nie zdoła ukończyć rund (np. straci wszystkie szanse/życia lub nie osiągnie wymaganego wyniku).
@@ -98,7 +100,8 @@
 * **UC-3: Ponowna rozgrywka** - Gracz po zakończonej rozgrywce rozpoczyna kolejną.
 * **UC-4: Sprawdzenie zasad** - Gracz uruchamia grę i z poziomu menu wchodzi w zasady. Następnie wychodzi z zasad i opuszcza aplikację lub rozpoczyna rozgrywkę.
 
-  ![image](https://github.com/user-attachments/assets/f7cd6b6c-2fa1-49da-81fa-725dd6694325)
+### Diagram przypadków użycia
+![image](https://github.com/user-attachments/assets/f7cd6b6c-2fa1-49da-81fa-725dd6694325)
 
 
 ## Architektura
@@ -109,6 +112,10 @@
     * Nie ma wydzielonej warstwy backend (gra działa w pełni lokalnie), stąd architektura jest jednopoziomowa: Godot obsługuje zarówno logikę, jak i prezentację. Komunikacja wewnątrz gry opiera się na sygnałach Godota (np. sygnał wywoływany przy kliknięciu karty uruchamia metodę w CardManager sprawdzającą ruch).
 * **Moduły i skrypty:** Każdy główny węzeł posiada przypisany skrypt GDScript realizujący jego zadania, np.
     * Skrypt CardManager.gd - zawiera logikę rozgrywki w trakcie rundy: tasowanie talii, rozdawanie kart, sprawdzanie dopasowań, naliczanie punktów, wykrywanie Yaku, obsługę decyzji Koi-Koi oraz kończenie rundy.
+
+### Przykładowy fragment architektury
+![image](https://github.com/user-attachments/assets/3876224c-b070-466b-a67a-0cb366858ea9)
+
 
 ## Testowanie
 
